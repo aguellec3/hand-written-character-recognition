@@ -14,7 +14,7 @@ class Classifier(nn.Module):
         self.conv3 = nn.Conv2d(64, 128, 3, 2)
         self.conv4 = nn.Conv2d(128, 256, 3, 2)
         self.maxpool = nn.MaxPool2d(2, 2)
-        self.fc1 = nn.Linear(2304, 64)
+        self.fc1 = nn.Linear(256, 64)
         self.fc2 = nn.Linear(64, 62)
         self.init_weights()
 

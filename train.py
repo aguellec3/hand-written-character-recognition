@@ -1,6 +1,6 @@
 import time
 import torch
-import evaluate
+from evaluate import evaluate
 
 
 def training(model, num_epochs, optimizer, criterion, train_loader, val_loader):
@@ -10,8 +10,8 @@ def training(model, num_epochs, optimizer, criterion, train_loader, val_loader):
     val_acc = []
 
     print("start of training")
-    epoch_time_start = time.time()
     for epoch in range(num_epochs):
+        epoch_time_start = time.time()
         print(f"epoch: {epoch}")
         correct = 0
         model.train()

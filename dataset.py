@@ -5,6 +5,9 @@ import glob
 from torch.utils.data import DataLoader, Dataset
 from torchvision import transforms
 
+# Dataset reference
+# https://www.nist.gov/srd/nist-special-database-19
+
 """ This is what each class name represents
 0-9: 30-39
 A-I: 41-49
@@ -90,7 +93,6 @@ class DatasetImages(Dataset):
         self.class_names = class_names
         self.transform = transform
         self.files = glob.glob(os.path.join(root_dir, "*.png"))
-        print(self.__len__())
 
     def __len__(self):
         return len(self.files)
@@ -100,8 +102,7 @@ class DatasetImages(Dataset):
         img = np.asarray(img)
         filename = os.path.basename(self.files[idx])
         label = int(np.where(self.class_names == filename[6:8])[0][0])
-        if self.transform:
-            img = self.transform(img)
+        img = self.transform(img)
         return img, label
 
 

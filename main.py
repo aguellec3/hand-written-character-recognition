@@ -1,5 +1,4 @@
 import sys
-import numpy as np
 import torch.nn as nn
 import torch.optim as optim
 from pathlib import Path
@@ -8,12 +7,11 @@ from classifier import Classifier
 from train import training
 from evaluate import evaluate
 from visualize import visualize
-
-# Dataset reference
-# https://www.nist.gov/srd/nist-special-database-19
+from parse_args import parse_args
 
 
 def main(args):
+    params = parse_args(args)
     folder_root = Path.cwd() / "data"
 
     # Get and split the data
@@ -23,8 +21,8 @@ def main(args):
     model = Classifier()
 
     # Train the Model
-    epochs = 13  # This is low since I'm working on CPU
-    lr = 0.00001
+    epochs = params.epochs
+    lr = params.lr
     criterion = nn.CrossEntropyLoss()
 
     train_acc, val_acc, model = training(
@@ -50,4 +48,4 @@ def main(args):
 
 
 if __name__ == "__main__":
-    main(sys.argv)
+    main(sys.argv[1:])

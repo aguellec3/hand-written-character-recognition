@@ -29,13 +29,18 @@ def parse_args(args):
     parser.add_argument(
         "-e",
         "--epochs",
+        required=False,
+        default=15,
         help="Number of epochs the model will be trained for.",
-        action=_valid_epochs,
+        # action=_valid_epochs,
     )
 
     parser.add_argument(
         "-l",
         "--lr",
+        required=False,
+        default=0.0001,
         help="Learning rate used by the optimizer",
-        action=_valid_lr,
+        # action=_valid_lr,
     )
+    return parser.parse_args(args)
