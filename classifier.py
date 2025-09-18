@@ -3,6 +3,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+
 class Classifier(nn.Module):
     def __init__(self):
         super(Classifier, self).__init__()
@@ -21,7 +22,14 @@ class Classifier(nn.Module):
 
         torch.manual_seed(442)
 
-        for layer in [self.conv1, self.conv2, self.conv3, self.conv4, self.fc1, self.fc2]:
+        for layer in [
+            self.conv1,
+            self.conv2,
+            self.conv3,
+            self.conv4,
+            self.fc1,
+            self.fc2,
+        ]:
             l_in = layer.weight.size(1)
             nn.init.normal_(layer.weight, 0.0, 1 / np.sqrt(5 * 5 * l_in))
             nn.init.constant_(layer.bias, 0.0)

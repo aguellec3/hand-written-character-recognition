@@ -2,23 +2,24 @@ import time
 import torch
 import evaluate
 
+
 def training(model, num_epochs, optimizer, criterion, train_loader, val_loader):
     best_acc = 0
     best_model = model
     train_acc = []
     val_acc = []
 
-    print('start of training')
+    print("start of training")
     epoch_time_start = time.time()
     for epoch in range(num_epochs):
-        print(f'epoch: {epoch}')
+        print(f"epoch: {epoch}")
         correct = 0
         model.train()
         for x_, y_ in train_loader:
             optimizer.zero_grad()
             output = model(x_)
             y_pred = torch.argmax(output)
-            loss = criterion(torch.reshape(output, (1,62)), y_)
+            loss = criterion(torch.reshape(output, (1, 62)), y_)
             loss.backward()
             optimizer.step()
             correct += (y_pred == y_[0]).float().sum()
@@ -36,8 +37,8 @@ def training(model, num_epochs, optimizer, criterion, train_loader, val_loader):
         val_acc.append(val_acc_epoch)
 
         # Print train and val accuracys
-        print(f'train accuracy: {train_acc_epoch}')
-        print(f'validation accuracty: {val_acc_epoch}')
-        print(f'epoch duration:{time.time()-epoch_time_start}')
+        print(f"train accuracy: {train_acc_epoch}")
+        print(f"validation accuracty: {val_acc_epoch}")
+        print(f"epoch duration:{time.time()-epoch_time_start}")
 
     return train_acc, val_acc, best_model

@@ -1,5 +1,6 @@
 import torch
 
+
 def evaluate(model, loader):
     model.eval()
     correct = 0
